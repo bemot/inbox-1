@@ -5,10 +5,12 @@ const path = require('path')
 const fs = require('fs')
 const solc = require('solc')
 
-//resolves path to files on computer of 'Inbox.sol'
-//Read-in source code of file
+//resolves path to files on computer of 'Inbox.sol' using 'path'
+//Read-in source code of file with 'fs'
 const inboxPath = path.resolve(__dirname, 'contracts', 'Inbox.sol')
-const source = fs.readFile(inboxPath, 'utf-8')
+const source = fs.readFile(inboxPath, 'utf-8', (err) => {
+    if (err) throw err;
+})
 
-//compile src code w/ errors to console
-console.log(solc.compile(source, 1))
+//compile src code w/ errors to console using 'solc'
+console.log(solc.compile(source))
