@@ -4,13 +4,32 @@
 const path = require('path')
 const fs = require('fs')
 const solc = require('solc')
+const CONTRACT_FILE = 'Inbox.sol'
 
 //resolves path to files on computer of 'Inbox.sol' using 'path'
-//Read-in source code of file with 'fs'
+//Read-in source code of file with 'fs' as string
 const inboxPath = path.resolve(__dirname, 'contracts', 'Inbox.sol')
-const source = fs.readFile(inboxPath, 'utf-8', (err) => {
-    if (err) throw err;
-})
+const content = fs.readFileSync(inboxPath).toString()
 
-//compile src code w/ errors to console using 'solc'
-console.log(solc.compile(source))
+//configure input for compiling
+const input = {
+    language: 'Solidity',
+    sources: {
+        [CONTRACT_FILE]: {
+            content: content
+        }
+    },
+    settings: {
+        outputSelection: {
+            '*' : {'*' : ['*']}
+        }
+    }
+}
+
+//prints out compiled contract
+//output is a nested dictionary. Console output is the opcodes of the compiled contract
+const output = JSON.parse(solc.compile(JSON.stringify(input)))
+
+for (const contract in output.contracts[CONTRACT_FILE]) {
+    console.log(output.contracts[CONTRACT_FILE][contract].evm.bytecode.opcodes)
+}
