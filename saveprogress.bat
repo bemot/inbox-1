@@ -1,6 +1,9 @@
 git add * 
 git status
 @echo off
-while(input != null)
-    set /p input="would you like to commit additions? y/n: "
-@echo input
+set /p input="would you like to commit additions? y/n: "
+IF /I "%input%" == "y" (
+    set /p commit_message="enter a commit message: "
+    git commit -m commit_message
+    git push
+)
