@@ -31,5 +31,5 @@ const input = {
 const output = JSON.parse(solc.compile(JSON.stringify(input)))
 
 for (const contract in output.contracts[CONTRACT_FILE]) {
-    console.log(output.contracts[CONTRACT_FILE][contract].evm.bytecode.opcodes)
+    console.log(output.contracts[CONTRACT_FILE][contract].evm.bytecode)
 }
