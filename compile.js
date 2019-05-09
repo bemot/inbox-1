@@ -29,11 +29,8 @@ const input = {
 //prints out compiled contract
 //output is a nested dictionary. Console output is the opcodes of the compiled contract
 const output = JSON.parse(solc.compile(JSON.stringify(input)))
-
 const bytecode = output.contracts[CONTRACT_FILE]["Inbox"].evm.bytecode.object
-const abi = JSON.stringify(
-                JSON.parse(
-                    output.contracts[CONTRACT_FILE]["Inbox"]["metadata"])["output"]["abi"])
+const abi = output.contracts[CONTRACT_FILE]["Inbox"].abi
 
-module.exports = { bytecode, abi }
+module.exports = { bytecode: bytecode, abi: abi }
 //module.exports = solc.compile(source).contracts[':Inbox']
