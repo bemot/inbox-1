@@ -33,4 +33,3 @@ const bytecode = output.contracts[CONTRACT_FILE]["Inbox"].evm.bytecode.object
 const abi = output.contracts[CONTRACT_FILE]["Inbox"].abi
 
 module.exports = { bytecode: bytecode, abi: abi }
-//module.exports = solc.compile(source).contracts[':Inbox']
