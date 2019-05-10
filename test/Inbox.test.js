@@ -6,15 +6,15 @@ const ganache = require('ganache-cli')
 //Web3 -> constructor
 //web3 instance, use ganache 'provider' connection to local machine
 const Web3 = require('web3')
-const provider = ganache.provider()
-const web3 = new Web3()
+const web3 = new Web3(ganache.provider())
 
 //require compiled contract object
 const { bytecode, abi } = require('../compile')
 
 
-let accounts;
-let inbox;
+let accounts
+let inbox
+const CONTRACT_STRING = 'contract initialization string'
 
 //use 'async for asychronous methods'
 beforeEach(async () => {
@@ -24,17 +24,20 @@ beforeEach(async () => {
            
     // Use one account to deploy contract
     inbox = await new web3.eth.Contract(abi)
-        .deploy({ data: bytecode, arguments: ['contract init string']})
-        .send({ from: accounts[0], gas: '1000000' })
-
-    inbox.setProvider(provider)
+        .deploy({ data: bytecode, arguments: [CONTRACT_STRING]})
+        .send({ gas: '1000000', from: accounts[0] })
 })
 
 describe('Inbox', () => {
-    it('deploys a contract', () => {
-        // console.log(inbox)
+    it('deploys a contract', () => {        
         assert.ok(inbox.options.address)
     })
+    it('has a default message', async() => {
+        const message = await inbox.methods.message().call()
+        assert.equal(CONTRACT_STRING, message)
+    })
 })
+
+
 
 
