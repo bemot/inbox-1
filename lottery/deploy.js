@@ -26,7 +26,7 @@ const deploy = async() => {
 
     //one Truffle Vx.x.x > V0.0.4 include '0x' in bytecode and remove gas
     const result = await new web3.eth.Contract(abi)
-        .deploy({ data: bytecode, arguments: [ 'hi there!' ] })
+        .deploy({ data: bytecode, arguments: [] })
         .send({ gas: '1000000', from: accounts[0] })
         .catch((e) => {console.log(e)})
 
