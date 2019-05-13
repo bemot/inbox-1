@@ -34,13 +34,13 @@ describe('Inbox', () => {
     })
     it('has a default message', async() => {
         const message = await inbox.methods.message().call()
-        assert.equal(CONTRACT_STRING, message)
+        assert.strictEqual(message, CONTRACT_MESSAGE)
     })
     it('can change the message', async() => {
         const NEW_MESSAGE = 'new message'
         await inbox.methods.setMessage(NEW_MESSAGE).send({ from: accounts[0] })
         const message = await inbox.methods.message().call()
-        assert.equal(message, NEW_MESSAGE)
+        assert.strictEqual(message, NEW_MESSAGE)
     })
 })
 
