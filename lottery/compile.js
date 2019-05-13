@@ -8,8 +8,8 @@ const CONTRACT_FILE = 'Lottery.sol'
 
 //resolves path to files on computer of 'Inbox.sol' using 'path'
 //Read-in source code of file with 'fs' as string
-const inboxPath = path.resolve(__dirname, 'contracts', 'Lottery.sol')
-const content = fs.readFileSync(inboxPath).toString()
+const filePath = path.resolve(__dirname, 'contracts', CONTRACT_FILE)
+const content = fs.readFileSync(filePath).toString()
 
 //configure input for compiling
 const input = {
