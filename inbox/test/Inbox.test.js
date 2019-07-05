@@ -46,10 +46,11 @@ describe('Inbox', () => {
         assert.equal(message, CONTRACT_STRING);
     });
 
-    const newMessage = 'bibik is alive again'
+    const newMessage = 'bobik is alive again'
     it('can change the message', async () => {
         await inbox.methods.setMessage(newMessage).send({from: accounts[0]});
         const message = await inbox.methods.message().call();
+        console.log('new message is - ' + '"'+message+'"');
         assert.equal(message,newMessage);    
 
     });
