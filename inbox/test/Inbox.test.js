@@ -50,7 +50,11 @@ describe('Inbox', () => {
     it('can change the message', async () => {
         await inbox.methods.setMessage(newMessage).send({from: accounts[0]});
         const message = await inbox.methods.message().call();
+<<<<<<< HEAD
         console.log('new message is - ' + '"'+message+'"');
+=======
+        console.log(message);
+>>>>>>> c5d68e6b4a4582438291dec3c823541e6e05a49a
         assert.equal(message,newMessage);    
 
     });
